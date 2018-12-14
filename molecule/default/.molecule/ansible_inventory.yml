@@ -1,0 +1,11 @@
+# Molecule managed
+
+---
+all:
+  hosts:
+    gitlab_centos7: &id001
+      ansible_connection: docker
+ungrouped:
+  hosts:
+    gitlab_centos7: *id001
+  vars: {}

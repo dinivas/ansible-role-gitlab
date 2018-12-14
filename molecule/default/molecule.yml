@@ -1,0 +1,26 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: gitlab_centos7
+    image: centos:7
+    privileged: True
+    command: '/sbin/init'
+    cap_add: ['SYS_ADMIN', 'SETPCAP']
+    published_ports:
+      - 0.0.0.0:8443:443/tcp
+      - 0.0.0.0:8086:80/tcp
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
