@@ -1,0 +1,11 @@
+---
+language: python
+services: docker
+
+install:
+  # Install test dependencies.
+  - pip install molecule yamllint ansible-lint docker
+
+script:
+  # Run tests.
+  - molecule test
