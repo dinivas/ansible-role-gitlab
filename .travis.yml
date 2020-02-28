@@ -8,4 +8,4 @@ install:
 
 script:
   # Run tests.
-  - molecule test
+  -  travis_wait molecule test
