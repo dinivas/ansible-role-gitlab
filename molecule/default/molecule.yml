@@ -7,7 +7,8 @@ lint: |
   set -e yamllint
 platforms:
   - name: instance
-    image: "geerlingguy/docker-centos7-ansible:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     published_ports:
@@ -18,4 +19,4 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: converge.yml
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
