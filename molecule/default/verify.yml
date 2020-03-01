@@ -1,7 +1,6 @@
 ---
 - name: Verify
   hosts: all
-  become: true
 
   vars:
     requested_gitlab_services:  ['alertmanager*', 'gitaly*', 'gitlab-exporter*', 'gitlab-workhorse*', 'logrotate*', 'nginx*', 'node-exporter*', 'postgres-exporter*', 'postgresql*', 'prometheus*', 'redis*', 'redis-exporter*', 'sidekiq*', 'unicorn*']

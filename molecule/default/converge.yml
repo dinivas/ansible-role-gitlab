@@ -1,8 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-
+  
   vars:
     gitlab_restart_handler_failed_when: false
 
@@ -13,7 +12,7 @@
         state: absent
 
   tasks:
-    - name: "Include ansible-role-gitlab"
+    - name: "Test ansible-role-gitlab"
       include_role:
         name: "ansible-role-gitlab"
 
