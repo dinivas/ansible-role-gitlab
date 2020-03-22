@@ -16,4 +16,3 @@
     - name: "Include ansible-role-gitlab"
       include_role:
         name: "ansible-role-gitlab"
-

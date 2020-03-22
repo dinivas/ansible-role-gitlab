@@ -4,23 +4,25 @@
   become: true
 
   vars:
-    requested_gitlab_services:  ['alertmanager*', 'gitaly*', 'gitlab-exporter*', 'gitlab-workhorse*', 'logrotate*', 'nginx*', 'node-exporter*', 'postgres-exporter*', 'postgresql*', 'prometheus*', 'redis*', 'redis-exporter*', 'sidekiq*', 'unicorn*']
+    requested_gitlab_services: ['alertmanager*', 'gitaly*', 'gitlab-exporter*', 'gitlab-workhorse*',
+                                'logrotate*', 'nginx*', 'node-exporter*', 'postgres-exporter*', 'postgresql*',
+                                'prometheus*', 'redis*', 'redis-exporter*', 'sidekiq*', 'unicorn*']
 
   tasks:
     - name: Populate service facts
       service_facts:
 
-    - name: Check if Gitlab service starts at boot 
+    - name: Check if Gitlab service starts at boot
       fail:
         msg: "Gitlab service doesn't exist"
       when: "'gitlab-runsvdir.service' not in services"
 
-    - name: Register gitlab running services 
+    - name: Register gitlab running services
       command: gitlab-ctl service-list
       register: gitlab_services_list
 
-    - name: Check if the requested gitlab services are up and running 
-      fail: 
+    - name: Check if the requested gitlab services are up and running
+      fail:
         msg: "At least one of the mandatory gitlab services is not up and running"
       with_items: "{{ requested_gitlab_services }}"
       when: "item not in gitlab_services_list.stdout_lines "
